@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Popup.css";
+import "../Popup/Popup.css";
 
 function Popup({ teams, currentTeam, handlePresent, handleChooseOther, presentationOrder }) {
   const [otherTeam, setOtherTeam] = useState("");

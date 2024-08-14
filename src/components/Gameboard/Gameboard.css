@@ -125,7 +125,7 @@
   }
   
   .square.ship {
-    background-image: url('src/img/ship.png');
+    background-image: url('../../img/ship.png');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 1;
@@ -133,7 +133,7 @@
   }
 
   .square.missed {
-    background-image: url('src/img/red-cross.png');
+    background-image: url('../../img/red-cross.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -145,7 +145,7 @@
   }
   
   .square.ship.revealed {
-    background-image: url('src/img/ship.png');
+    background-image: url('../../img/ship.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -193,7 +193,7 @@
 .explosion-frame {
   width: 500px;
   height: 500px;
-  background-image: url('src/img/explosion.png');
+  background-image: url('../../img/explosion.png');
   background-size: cover;
   animation: explosion 1s steps(8) forwards;
   opacity: 0;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./GameBoard.css";
+import "../Gameboard/Gameboard.css";
 import Popup from "../Popup/Popup";
 
 export default function GameBoard(props) {
