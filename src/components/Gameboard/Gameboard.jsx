@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "react-battleships-picker/src/components/Gameboard/Gameboard.css";
+import "src/components/Gameboard/Gameboard.css";
 import Popup from "../Popup/Popup";
 
 export default function GameBoard(props) {
