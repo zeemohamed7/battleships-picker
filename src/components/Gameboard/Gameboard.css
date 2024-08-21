@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
   }
 
 .archivo-black-regular {
@@ -25,6 +26,7 @@
   
   .body {
     display: flex;
+    font-size: 1.5em;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -105,7 +107,8 @@
     display: flex;
     justify-content: center;
     align-items: space-evenly;
-    font-size: 18px;
+    font-size: 2rem;
+
     font-weight: bold;
   }
   
@@ -166,10 +169,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-    padding-left: 200px;
-    position: absolute;
+    padding-left: 20px;
   }
   
   .team-item {
@@ -181,6 +181,7 @@
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     list-style: none;
+    text-align: center;
   }
   
 .explosion-container {
@@ -220,4 +221,28 @@
   }
 }
 
+.message-container {
+  color: rgba(32, 124, 202, 1);
 
+  background-color:#f0f0f0;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  text-align: center;
+}
+
+.hit {
+  background-color: green; 
+  color:#f0f0f0;
+
+}
+
+.miss {
+  background-color: red;
+  color:#f0f0f0;
+
+}

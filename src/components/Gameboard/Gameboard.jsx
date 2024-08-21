@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../Gameboard/Gameboard.css";
+import "../Gameboard/GameBoard.css";
 import Popup from "../Popup/Popup";
 
 export default function GameBoard(props) {
-  const teams = [
+  const [teams, setTeams] = useState([
     "Team 1",
     "Team 2",
     "Team 3",
@@ -14,17 +14,51 @@ export default function GameBoard(props) {
     "Team 8",
     "Team 9",
     "Team 10",
-  ];
-  const [presentationOrder, setPresentationOrder] = useState([]);
+  ])
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const [inTurn, setInTurn] = useState(false)
   const [squares, setSquares] = useState(Array(36).fill(null));
   const [shipPositions, setShipPositions] = useState([]);
+  const [turn, setTurn] = useState(1);
+  const [message, setMessage] = useState('Start!');
+  const [isGameOver, setIsGameOver] = useState(false)
+
+
+  const messageContainer = document.querySelector(".message-container")
+
+
   useEffect(() => {
     initGame();
   }, []);
 
 
+  const handleTurn = () => {
+    setShowPopup(false);
+
+    setInTurn(false);
+    setTurn(turn + 1); 
+
+  setCurrentTeamIndex((currentTeamIndex + 1) % teams.length); 
+  if (teams.length === 1) {
+    setIsGameOver(true)
+  }
+    
+  };
+
+  const handleMessageColor = (fire) => {
+    if ( fire === 'hit' ) {
+      messageContainer.classList.remove("miss");
+
+      messageContainer.classList.add("hit");
+    } 
+
+    if ( fire === 'miss' ) {
+      messageContainer.classList.remove("hit");
+
+      messageContainer.classList.add("miss");
+    } 
+  }
   
   // Initialize the game
   function initGame() {
@@ -43,23 +77,34 @@ export default function GameBoard(props) {
     setShipPositions(newShipPositions);
     console.log("Ship positions:", newShipPositions);
 
-    // createTeamList();
   }
 
   function handleFire(index) {
+    setInTurn(true)
     // Play audio
+
+
     const squareEls = document.querySelectorAll(".square");
     const square = squareEls[index];
 
+
     // Check if the shot hits a ship
+    // HIT
     if (shipPositions.includes(index)) {
       square.classList.add("ship");
       square.classList.add("revealed");
       square.setAttribute("opacity", 0);
-      console.log("Hit a ship!");
+      handleMessageColor("hit")
+      setMessage(`${teams[currentTeamIndex]} hit a ship!`);
+
+      setShowPopup(true);
+
+
+
 
       const newShipPositions = [...shipPositions];
       newShipPositions.splice(newShipPositions.indexOf(index), 1);
+      // 🪿🪿🪿🪿🪿 Remove team from list 
       setShipPositions(newShipPositions);
       createExplosion(index);
 
@@ -67,23 +112,25 @@ export default function GameBoard(props) {
         square.classList.add("hidden");
       }, 2000);
 
-      setTimeout(() => {
-      askPresent();
-      }, 1500);
-    } else {
+
+
+    } 
+    // MISS
+    else {
       createExplosion(index);
+      setMessage(`Miss!`);
+      handleMessageColor("miss")
       setTimeout(() => {
         square.classList.add("missed");
+
       }, 1000);
-      handleMiss();
 
+      handleTurn()
     }
+
+
   }
 
-  // Update the game message
-  function updateGameMessage(message) {
-    setGameMessage(message);
-  }
 
   function createExplosion(index) {
     const squareEls = document.querySelectorAll(".square");
@@ -105,45 +152,27 @@ export default function GameBoard(props) {
 
     document.body.appendChild(explosionContainer);
 
-    // Remove the explosion container after the animation is finished
     setTimeout(() => {
       explosionContainer.remove();
     }, 1000);
   }
 
-  const handlePresent = (team) => {
-    setPresentationOrder([...presentationOrder, team]);
-    console.log(presentationOrder)
-    setShowPopup(false);
-    setCurrentTeamIndex((currentTeamIndex + 1) % teams.length);
-  };
 
   const handleChooseOther = (otherTeam) => {
-    const otherTeamIndex = presentationOrder.indexOf(otherTeam);
-    if (otherTeamIndex === -1) {
-      setPresentationOrder([...presentationOrder, otherTeam]);
-    } else {
-      const newPresentationOrder = [...presentationOrder];
-      newPresentationOrder.splice(otherTeamIndex, 1);
-      newPresentationOrder.push(otherTeam);
-      setPresentationOrder(newPresentationOrder);
-    }
+
     setShowPopup(false);
   };
 
 
-  function askPresent() {
-    setShowPopup(true);
-  }
 
-  const handleMiss = () => {
-    setCurrentTeamIndex((currentTeamIndex + 1) % teams.length);
-  };
 
   return (
     <div className="body vt323-regular">
-      <div className="message"></div>
       <div className="game-container">
+      <h3 className="" >Current Team: {teams[currentTeamIndex]}</h3>
+      <div className="message-container">
+      <p className="message">{message}</p>
+      </div>
         <div className="column-labels">
           <div>1</div>
           <div>2</div>
@@ -176,15 +205,18 @@ export default function GameBoard(props) {
         <Popup
         teams={teams}
           currentTeam={teams[currentTeamIndex]}
-          handlePresent={handlePresent}
+          // handlePresent={handlePresent}
           handleChooseOther={handleChooseOther}
-          presentationOrder={presentationOrder}
+          handleTurn={handleTurn}
+          isGameOver={isGameOver}
           
         />
       )}
-      <div className="team-order">
+      <div className="team-container">
         <ul>
-        {presentationOrder.map((team) => (
+        <h4>Teams left</h4>
+
+        {teams.map((team) => (
           <li className="team-item" key={team}>{team}</li>
         ))}
         </ul>
