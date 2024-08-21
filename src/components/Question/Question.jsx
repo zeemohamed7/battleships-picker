@@ -150,7 +150,6 @@ export default function Question({ currentTeam, otherTeam, handleTeamAfterQuesti
 
     } else {
       // other team has to present
-      console.log("wrong")
       setMessage("Incorrect. " + otherTeam + " has to present!")
       setAnswering(false)
       handleTeamAfterQuestion(otherTeam)
@@ -169,7 +168,7 @@ export default function Question({ currentTeam, otherTeam, handleTeamAfterQuesti
 
   return (
     <div className="quiz-container">
-      <h3>{otherTeam}</h3>
+      <h3>{currentTeam} vs {otherTeam}</h3>
       <div className="question">
         { answering && questions[currentQuestion].question}
       </div>
