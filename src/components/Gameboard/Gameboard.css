@@ -1,3 +1,6 @@
+/* background from https://codepen.io/TidyCoder/pen/RwmrgpB */
+/* radar from https://codepen.io/Gsbansal/pen/MWGbyrz */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -26,16 +29,26 @@
   
   .body {
     display: flex;
+    flex-direction: row;
+    
     font-size: 1.5em;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
+
     height: 100vh;
     overflow: hidden;
-    background: radial-gradient(circle, rgba(125, 185, 232, 1) 0%, rgba(32, 124, 202, 1) 39%, rgba(59, 103, 158, 1) 100%);
+    /* background: radial-gradient(circle, rgba(125, 185, 232, 1) 0%, rgba(32, 124, 202, 1) 39%, rgba(59, 103, 158, 1) 100%); */
   
   }
 
+
+
+  .background {
+    display: flex;
+  }
+
   .game-container{
+    z-index: 1;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -91,11 +104,16 @@
   .row-labels {
     color: #f0f0f0;
   
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-around;
+    margin-left: 30px;
+    margin-top: 200px;
     text-align: center;
-  align-items: center;
     margin-right: 30px;
     height: 600px;
+    align-items: center;
   
   }
   
@@ -168,6 +186,18 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-left: 20px;
+    margin-top: 20px;
+  }
+
+  .teams-left{
+    background-color: #232323;
+    color: #22b53d;
+    margin: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    text-align: center;
   }
   
   .team-item {
@@ -224,7 +254,7 @@
 
   background-color:#f0f0f0;
   padding: 10px 20px;
-  margin: 20px;
+  margin: 5px;
   border-radius: 5px;
   font-size: 18px;
   font-weight: bold;
@@ -243,4 +273,124 @@
   background-color: red;
   color:#f0f0f0;
 
+}
+
+
+
+
+
+.waterHere {
+  top: 0;
+  left: 0;
+    pointer-events: none; 
+  z-index: -1;
+	width: 100%;
+	height: 100vh;
+	filter: url("#crumple-effect");
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+	gap: 15px;
+  position: absolute;
+}
+
+body:before{
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	z-index: -1;
+	background: #2575dd;
+	position: absolute;
+}
+
+.waterHere div{
+	background: #3580e1;
+	border-radius: 50%;
+}
+svg{
+	position: absolute;
+}
+
+
+.current-team {
+  background-color: #232323;
+  color: #22b53d;
+  margin: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  text-align: center;
+}
+
+
+
+
+.outer-circle {
+  z-index: 2;
+
+	/* 	design the circle */
+	width: 340px;
+	height: 340px;
+	border-radius: 50%;
+	box-shadow: 0 0 8px 0 #aaa;
+	/* 	set its position as relative so that the inner green scanner can be positioned absolute */
+	position: absolute;
+}
+
+.green-scanner {
+	/* 	design the green scanner 40px smaller than the outer-circle */
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+
+	/* 	center this green-scanner inside the parent */
+  position: absolute;
+  top: 20px;
+  left: 20px; 
+
+	/* 	set the background resembling a scanner */
+	background: conic-gradient(#00ff0055, #00ff00);
+
+	/* 	define animation properties and set its easing to linear (default 'ease' doesn't look natural) */
+	animation: scan 4s infinite linear;
+}
+
+/* make waves using the pseudo-elements for semantic purposes */
+.outer-circle:before,
+.outer-circle:after {
+	content: "";
+	width: 340px;
+	height: 340px;
+	border-radius: 50%;
+	position: absolute;
+	border: 1px solid #eee;
+	animation: ripple 2s infinite linear;
+}
+
+.outer-circle:after {
+	animation-delay: 1s;
+}
+
+@keyframes scan {
+	to {
+		transform: rotate(1turn);
+	}
+}
+
+@keyframes ripple {
+	to {
+		transform: scale(2.5);
+	}
+}
+
+
+.scanner-overlay {
+  position: fixed; /* Position it over the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  pointer-events: none; /* Allow clicks to pass through */
 }

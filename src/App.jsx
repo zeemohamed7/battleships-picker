@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Gameboard from './components/Gameboard/Gameboard'
-
+import './App.css'
 export default function App() {
   const [teams, setTeams] = useState([
     "Team 1",

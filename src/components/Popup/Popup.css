@@ -87,6 +87,12 @@
     flex-direction: column;  
   }
 
+  .quiz-container .message-container {
+    padding: 20px;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+  }
+
   .team-choice-item, .option {
     margin: 0.5rem;
     padding: 0.5rem;
