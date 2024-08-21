@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Question from '../Question/Question';
-import "../Popup/Popup.css";
+import "/src/components/Popup/Popup.css";
+
 
 function Popup({
   teams,
