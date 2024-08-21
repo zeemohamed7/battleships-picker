@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import "../Gameboard/GameBoard.css";
-import "src/components/Gameboard/Gameboard.jsx"
+import "/src/components/Gameboard/Gameboard.jsx"
 import Popup from "../Popup/Popup";
 
 export default function GameBoard(props) {
