@@ -15,12 +15,28 @@ function Popup({
   const [showGameover, setShowGameover] = useState(isGameOver);
   const [availableTeams, setAvailableTeams] = useState(teams);
   const [showQuestion, setShowQuestion] = useState(false)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
 
   const handlePresent = (team) => {
     teams.splice(teams.indexOf(team), 1);
     handleTurn()
   };
+  const handleChangeQuestion = () => {
+    console.log("changing question: " + (currentQuestion + 1))
+    setCurrentQuestion(currentQuestion + 1)
+  }
 
+  const handleCloseQuestion = () => {
+    setShowQuestion(false)
+      handleTurn()
+  }
+
+  const handleTeamAfterQuestion = (team) => {
+    handleChangeQuestion()
+    teams.splice(teams.indexOf(team), 1);
+
+
+  }
 
 
 
@@ -33,11 +49,9 @@ function Popup({
   };
 
   const handleOtherTeamSelect = (team) => {
-    console.log("get quiz question")
+    setOtherTeam(team);
     setShowQuestion(true)
     setShowTeamList(false)
-    setOtherTeam(team);
-    // handleChooseOther(team);
     // handleTurn();
   };
 
@@ -88,7 +102,7 @@ function Popup({
           </div>
         )}
       </div>}
-      { !showTeamList && showQuestion && <Question className="popup-question" otherTeam={otherTeam} currentTeam={currentTeam}/>}
+      { !showTeamList && showQuestion && <Question className="popup-question" otherTeam={otherTeam} currentTeam={currentTeam} handleTeamAfterQuestion={handleTeamAfterQuestion} currentQuestion={currentQuestion} handleCloseQuestion={handleCloseQuestion}/>}
 {    isGameOver &&  <div className="popup-gameover">
         <h3>GAME OVER</h3>
         <p>{currentTeam}, go ahead and present!😈</p>

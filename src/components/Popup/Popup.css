@@ -85,7 +85,6 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;  
-    padding-top: 20px;  
   }
 
   .team-choice-item, .option {

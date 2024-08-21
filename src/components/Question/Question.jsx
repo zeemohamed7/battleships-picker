@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Question({ currentTeam, otherTeam }) {
+export default function Question({ currentTeam, otherTeam, handleTeamAfterQuestion, currentQuestion, handleChangeQuestion, handleCloseQuestion }) {
 
 
   const questions = [
@@ -26,29 +26,51 @@ export default function Question({ currentTeam, otherTeam }) {
 
 
 
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [message, setMessage] = useState("")
+  const [answering, setAnswering] = useState(true)
 
 
   const handleAnswerClick = (selectedOption) => {
+  // If otherteam answer right, current team has to present
     if (selectedOption === questions[currentQuestion].answer) {
-  // if otherteam answer right, current team has to present
+      // current team has to present
+      setMessage("Correct! " + currentTeam + " has to present!")
+      setAnswering(false)
+      handleTeamAfterQuestion(currentTeam)
+      if (!answering) {
+        handleCloseQuestion()
 
+      }
+
+    } else {
+      // other team has to present
+      console.log("wrong")
+      setMessage("Incorrect. " + otherTeam + " has to present!")
+      setAnswering(false)
+      handleTeamAfterQuestion(otherTeam)
+      if (!answering) {
+        handleCloseQuestion()
+
+      }
     }
 
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
     } else {
-      // Quiz finished
+      // Quiz finished so exit
     }
   };
 
   return (
     <div className="quiz-container">
+      <h3>{otherTeam}</h3>
       <div className="question">
-        {questions[currentQuestion].question}
+        { answering && questions[currentQuestion].question}
       </div>
-      <ul>
+{  !answering &&    <div className='message-container'>{message}</div>}
+{  !answering &&    <button className='close-button' onClick={handleCloseQuestion} >Close</button>}
+{  answering &&    <ul>
+  
         {questions[currentQuestion].options.map((option, index) => (
           <button className='option'
             key={index} 
@@ -57,8 +79,7 @@ export default function Question({ currentTeam, otherTeam }) {
             {option}
           </button>
         ))}
-      </ul>
-      {/* Display score or quiz finished message here */}
+      </ul>}
     </div>
   )
 }
