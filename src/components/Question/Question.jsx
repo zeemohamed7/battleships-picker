@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+// import '../Question/Question.css'
 export default function Question({ currentTeam, otherTeam, handleTeamAfterQuestion, currentQuestion, handleChangeQuestion, handleCloseQuestion }) {
 
 
