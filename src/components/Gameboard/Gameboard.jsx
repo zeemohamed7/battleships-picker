@@ -23,6 +23,8 @@ export default function GameBoard(props) {
   const [turn, setTurn] = useState(1);
   const [message, setMessage] = useState('Start!');
   const [isGameOver, setIsGameOver] = useState(false)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+
 
 
   const messageContainer = document.querySelector(".message-container")
@@ -31,6 +33,7 @@ export default function GameBoard(props) {
   useEffect(() => {
     initGame();
   }, []);
+
 
 
   const handleTurn = () => {
@@ -58,6 +61,11 @@ export default function GameBoard(props) {
 
       messageContainer.classList.add("miss");
     } 
+  }
+  
+  const handleChangeQuestion = () => {
+    // console.log("changing question: " + (currentQuestion + 1))
+    setCurrentQuestion(currentQuestion + 1)
   }
   
   // Initialize the game
@@ -209,6 +217,8 @@ export default function GameBoard(props) {
           handleChooseOther={handleChooseOther}
           handleTurn={handleTurn}
           isGameOver={isGameOver}
+          currentQuestion={currentQuestion}
+          handleChangeQuestion={handleChangeQuestion}
           
         />
       )}

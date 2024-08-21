@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Question from '../Question/Question';
 import "../Popup/Popup.css";
 
@@ -9,30 +9,31 @@ function Popup({
   handleChooseOther,
   handleTurn,
   isGameOver,
+  currentQuestion,
+  handleChangeQuestion
 }) {
   const [otherTeam, setOtherTeam] = useState("");
   const [showTeamList, setShowTeamList] = useState(false);
   const [showGameover, setShowGameover] = useState(isGameOver);
   const [availableTeams, setAvailableTeams] = useState(teams);
   const [showQuestion, setShowQuestion] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
 
+
+
+  
   const handlePresent = (team) => {
     teams.splice(teams.indexOf(team), 1);
     handleTurn()
   };
-  const handleChangeQuestion = () => {
-    console.log("changing question: " + (currentQuestion + 1))
-    setCurrentQuestion(currentQuestion + 1)
-  }
+
 
   const handleCloseQuestion = () => {
+    handleChangeQuestion()
     setShowQuestion(false)
       handleTurn()
   }
 
   const handleTeamAfterQuestion = (team) => {
-    handleChangeQuestion()
     teams.splice(teams.indexOf(team), 1);
 
 
