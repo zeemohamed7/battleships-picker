@@ -18,7 +18,7 @@ export default function GameBoard(props) {
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [inTurn, setInTurn] = useState(false)
-  const [squares, setSquares] = useState(Array(36).fill(null));
+  const [squares, setSquares] = useState(Array(25).fill(null));
   const [shipPositions, setShipPositions] = useState([]);
   const [turn, setTurn] = useState(1);
   const [message, setMessage] = useState('Start!');
@@ -179,7 +179,7 @@ export default function GameBoard(props) {
           <div>3</div>
           <div>4</div>
           <div>5</div>
-          <div>6</div>
+          {/* <div>6</div> */}
         </div>
         <div className="temp">
           <div className="row-labels">
@@ -188,7 +188,7 @@ export default function GameBoard(props) {
             <div>C</div>
             <div>D</div>
             <div>E</div>
-            <div>F</div>
+            {/* <div>F</div> */}
           </div>
           <div className="game-board">
             {squares.map((square, index) => (

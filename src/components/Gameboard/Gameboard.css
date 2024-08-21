@@ -45,8 +45,8 @@
 
   .game-board {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     /* grid-column-gap: 1px;
     grid-row-gap: 1px; */
     width: 600px;
@@ -54,8 +54,6 @@
     justify-content: center;
     position: relative;
   
-    /* background-color: #9cd0e7; */
-    /* background: radial-gradient(circle, rgba(125, 185, 232, 1) 0%, rgba(32, 124, 202, 1) 39%, rgba(59, 103, 158, 1) 100%); */
     border: 5px solid #f0f0f0;
   
     padding: 10px;
@@ -82,7 +80,7 @@
     width: 600px;
   
     display: grid;
-    grid-template-columns: repeat(6, 40px);
+    grid-template-columns: repeat(5, 40px);
     margin-bottom: 10px;
     margin-left: 30px;
 
