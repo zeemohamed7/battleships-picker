@@ -33,7 +33,7 @@
     margin-top: 0;
   }
   
-  .popup .buttons {
+  .popup-presentation .buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
@@ -81,7 +81,14 @@
     flex-direction: column;    
   }
 
-  .team-choice-item {
+  .quiz-container > ul{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;  
+    padding-top: 20px;  
+  }
+
+  .team-choice-item, .option {
     margin: 0.5rem;
     padding: 0.5rem;
   }

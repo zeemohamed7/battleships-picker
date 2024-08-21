@@ -35,20 +35,19 @@ function Popup({
   const handleOtherTeamSelect = (team) => {
     console.log("get quiz question")
     setShowQuestion(true)
-    const newTeams = teams.splice(teams.indexOf(team), 1);
+    setShowTeamList(false)
     setOtherTeam(team);
-    setShowTeamList(false);
-    handleChooseOther(team);
-    handleTurn();
+    // handleChooseOther(team);
+    // handleTurn();
   };
 
   return (
     <div className="popup-container ">
       <div className="popup">
 {    !isGameOver &&    <div className="popup-presentation">
-        <h3>Presentation Choice</h3>
-        {!showTeamList && (
+        {!showTeamList && !showQuestion && (
           <div>
+        <h3>Presentation Choice</h3>
             <p>{currentTeam}, do you want to present?</p>
             <div className="buttons">
               <button onClick={() => handlePresent(currentTeam)}>
@@ -70,7 +69,7 @@ function Popup({
             <button onClick={handleChooseOther}>Choose</button>
           </div>
         )} */}
-        {showTeamList && (
+        {showTeamList && !showQuestion && (
           <div className="team-list">
             <h4>Select another team:</h4>
             <ul>
@@ -89,7 +88,7 @@ function Popup({
           </div>
         )}
       </div>}
-      { showQuestion && <Question />}
+      { !showTeamList && showQuestion && <Question className="popup-question" otherTeam={otherTeam} currentTeam={currentTeam}/>}
 {    isGameOver &&  <div className="popup-gameover">
         <h3>GAME OVER</h3>
         <p>{currentTeam}, go ahead and present!😈</p>
