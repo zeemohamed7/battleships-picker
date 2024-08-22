@@ -4,18 +4,7 @@ import "/src/components/Gameboard/Gameboard.css";
 import Popup from "../Popup/Popup";
 
 export default function GameBoard(props) {
-  const [teams, setTeams] = useState([
-    "Team 1",
-    "Team 2",
-    "Team 3",
-    "Team 4",
-    "Team 5",
-    "Team 6",
-    "Team 7",
-    "Team 8",
-    "Team 9",
-    "Team 10",
-  ]);
+  const [teams, setTeams] = useState(props.teams);
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
@@ -71,7 +60,7 @@ export default function GameBoard(props) {
     }
 
     const newShipPositions = [];
-    while (newShipPositions.length < 10) {
+    while (newShipPositions.length < 9) {
       const randomPosition = getRandomNumber();
       if (!newShipPositions.includes(randomPosition)) {
         newShipPositions.push(randomPosition);
@@ -93,17 +82,14 @@ export default function GameBoard(props) {
     // Check if the shot hits a ship
     // HIT
     if (shipPositions.includes(index)) {
-
       setTimeout(() => {
         setMessage(`${teams[currentTeamIndex]} hit a ship!`);
         handleMessageColor("hit");
         square.classList.add("ship");
         square.classList.add("revealed");
         square.setAttribute("opacity", 0);
-      setShowPopup(true);
-
+        setShowPopup(true);
       }, 1200);
-
 
       const newShipPositions = [...shipPositions];
       newShipPositions.splice(newShipPositions.indexOf(index), 1);
@@ -122,17 +108,17 @@ export default function GameBoard(props) {
         setMessage(`Miss!`);
         handleMessageColor("miss");
         square.classList.add("missed");
+      handleTurn();
 
       }, 1500);
       // setTimeout(() => {
       //   square.classList.add("missed");
       // }, 1000);
 
-      handleTurn();
     }
     setTimeout(() => {
       setShowScanner(false);
-    }, 2000); 
+    }, 1500);
   }
 
   function createExplosion(index) {
@@ -166,19 +152,18 @@ export default function GameBoard(props) {
 
   return (
     <div className="body vt323-regular">
-                  <div className="row-labels">
-              <div>A</div>
-              <div>B</div>
-              <div>C</div>
-              <div>D</div>
-              <div>E</div>
-              {/* <div>F</div> */}
-            </div>
+      <div className="row-labels">
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>D</div>
+        <div>E</div>
+        {/* <div>F</div> */}
+      </div>
       {showScanner && (
         <div class="outer-circle">
           <div class="green-scanner"></div>
-          <div className="scanner-overlay">
-        </div>
+          <div className="scanner-overlay"></div>
         </div>
       )}
       <div className="background">
@@ -212,7 +197,6 @@ export default function GameBoard(props) {
             {/* <div>6</div> */}
           </div>
           <div className="temp">
-
             <div className="game-board">
               {squares.map((square, index) => (
                 <div
